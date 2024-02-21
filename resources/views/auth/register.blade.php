@@ -10,6 +10,9 @@
 <form method="POST" action="{{ route('register-post') }}">
     @csrf
 
+    <input type="hidden" name="token" value="{{ $token }}">
+
+
     <div>
         <label for="name">İsim:</label>
         <input id="name" type="text" name="name" required autofocus>

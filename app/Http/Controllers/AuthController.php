@@ -12,14 +12,19 @@ class AuthController extends Controller
 {
 
     public function register(){
-        return view('auth.register');
+        $token = Str::random(60);
+
+        return view('auth.register',compact('token'));
     }
 
     public function registerPost(Request $request){
 
+        $token = Str::random(60);
+
         $data = request()->only([
            'name',
-           'email'
+           'email',
+            'token' => $token,
         ]);
 
         if (request()->filled('password')){
@@ -48,10 +53,11 @@ class AuthController extends Controller
         $token = Str::random(60);
 
         $data = [
-          'token' => $token,
           'name' => $request->name,
           'email' => $request->email,
         ];
+
+        $data['token'] = $token;
 
 
         if (request()->filled('password')){

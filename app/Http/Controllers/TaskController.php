@@ -130,12 +130,12 @@ class TaskController extends Controller
             return response()->json($task);
 
     }
-    public function apiDelete(Request $request, $id) {
+    public function apiDelete(Request $request) {
 
         $user = $request->token;
 
         if ($user == "admin"){
-            $task = TaskModel::find($id);
+            $task = TaskModel::find($request->id);
             if (!$task) {
                 return response()->json(['status' => false,'message' => 'Bulunamadı']);
             }
